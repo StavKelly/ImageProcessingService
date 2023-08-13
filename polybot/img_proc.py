@@ -17,6 +17,11 @@ class Img:
         self.path = Path(path)
         self.data = rgb2gray(imread(path)).tolist()
 
+# Creating an instance of the Img class
+my_img = Img('path/to/image.jpg')
+print(my_img.path)
+print(my_img.data)
+
     def save_img(self):
         """
         Do not change the below implementation
@@ -24,6 +29,19 @@ class Img:
         new_path = self.path.with_name(self.path.stem + '_filtered' + self.path.suffix)
         imsave(new_path, self.data, cmap='gray')
         return new_path
+
+# Save the modified image
+saved_path = my_img.save_img()
+print("Modified image saved to:", saved_path)
+
+     def rotate(self):
+      """
+      Rotate the image clockwise by 90 degrees using built-in functionality
+      """
+      self.data = list(zip(*self.data[::-1]))
+
+# Applying the rotate filter
+my_img.rotate()
 
     def blur(self, blur_level=16):
 
