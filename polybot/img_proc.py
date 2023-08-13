@@ -34,17 +34,6 @@ print(my_img.data)
 saved_path = my_img.save_img()
 print("Modified image saved to:", saved_path)
 
-     def rotate(self):
-      """
-      Rotate the image clockwise by 90 degrees using built-in functionality
-      """
-      # Rotate the data by 180 degrees
-      self.data = [row[::-1] for row in self.data[::-1]]
-
-# Applying the rotate filter twice for 180
-my_img.rotate()
-my_img.rotate()
-
     def blur(self, blur_level=16):
 
         height = len(self.data)
@@ -71,8 +60,12 @@ my_img.rotate()
             self.data[i] = res
 
     def rotate(self):
-        # TODO remove the `raise` below, and write your implementation
-        raise NotImplementedError()
+        # Rotate the data by 180 degrees
+        self.data = [row[::-1] for row in self.data[::-1]]
+
+# Applying the rotate filter twice for 180
+my_img.rotate()
+my_img.rotate()
 
     def salt_n_pepper(self):
         # TODO remove the `raise` below, and write your implementation
