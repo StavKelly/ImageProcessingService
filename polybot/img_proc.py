@@ -38,9 +38,11 @@ print("Modified image saved to:", saved_path)
       """
       Rotate the image clockwise by 90 degrees using built-in functionality
       """
-      self.data = list(zip(*self.data[::-1]))
+      # Rotate the data by 180 degrees
+      self.data = [row[::-1] for row in self.data[::-1]]
 
-# Applying the rotate filter
+# Applying the rotate filter twice for 180
+my_img.rotate()
 my_img.rotate()
 
     def blur(self, blur_level=16):
