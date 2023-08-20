@@ -42,7 +42,8 @@ mock_msg = {
          'height': 660
          }
     ],
-    'caption': 'Rotate'
+    'caption': 'Rotate',
+    'text': 'text test'
 }
 
 

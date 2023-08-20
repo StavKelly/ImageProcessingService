@@ -1,6 +1,7 @@
 from pathlib import Path
 from matplotlib.image import imread, imsave
 
+import matplotlib.pyplot as plt
 
 def rgb2gray(rgb):
     r, g, b = rgb[:, :, 0], rgb[:, :, 1], rgb[:, :, 2]
@@ -17,11 +18,6 @@ class Img:
         self.path = Path(path)
         self.data = rgb2gray(imread(path)).tolist()
 
-# Creating an instance of the Img class
-my_img = Img('path/to/image.jpg')
-print(my_img.path)
-print(my_img.data)
-
     def save_img(self):
         """
         Do not change the below implementation
@@ -30,9 +26,6 @@ print(my_img.data)
         imsave(new_path, self.data, cmap='gray')
         return new_path
 
-# Save the modified image
-saved_path = my_img.save_img()
-print("Modified image saved to:", saved_path)
 
     def blur(self, blur_level=16):
 
@@ -63,10 +56,6 @@ print("Modified image saved to:", saved_path)
         # Rotate the data by 180 degrees
         self.data = [row[::-1] for row in self.data[::-1]]
 
-# Applying the rotate filter twice for 180
-my_img.rotate()
-my_img.rotate()
-
     def salt_n_pepper(self):
         # TODO remove the `raise` below, and write your implementation
         raise NotImplementedError()
@@ -78,3 +67,16 @@ my_img.rotate()
     def segment(self):
         # TODO remove the `raise` below, and write your implementation
         raise NotImplementedError()
+
+# Creating an instance of the Img class
+my_img = Img('/Users/stavk/PycharmProjects/ImageProcessingService/polybot/test/beatles.jpeg')
+print(my_img.path)
+#print(my_img.data)
+
+# Applying the rotate filter twice for 180
+my_img.rotate()
+
+# Save the modified image
+saved_path = my_img.save_img()
+print("Modified image saved to:", saved_path)
+
