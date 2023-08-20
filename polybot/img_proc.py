@@ -73,7 +73,7 @@ my_img = Img('/Users/stavk/PycharmProjects/ImageProcessingService/polybot/test/b
 print(my_img.path)
 #print(my_img.data)
 
-# Applying the rotate filter twice for 180
+# Applying the rotate filter for 180
 my_img.rotate()
 
 # Save the modified image

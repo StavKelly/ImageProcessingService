@@ -4,7 +4,7 @@ import os
 import time
 from telebot.types import InputFile
 from polybot.img_proc import Img
-
+from img_proc import Img
 
 class Bot:
 
@@ -75,4 +75,40 @@ class QuoteBot(Bot):
 
 
 class ImageProcessingBot(Bot):
-    pass
+
+    def handle_message(self, msg):
+        logger.info(f'Incoming message: {msg}')
+
+        if self.is_current_msg_photo(msg):
+            try:
+                img_path = self.download_user_photo(msg)
+                img = Img(img_path)
+                #caption = msg.get("caption", "").lower()
+                caption = msg.get("caption", "").lower()
+                if caption == "":
+                    self.send_text(msg['chat']['id'], "Please send a photo with a valid caption.")
+                    return
+
+                elif caption == 'blur':
+                    img.blur()
+
+                elif caption == 'contour':
+                    img.contour()
+
+                elif caption == 'rotate':
+                    img.rotate()
+
+                else:
+                    self.send_text(msg['chat']['id'], "Unsupported filter. Please use one of: Blur, Contour, Rotate")
+                    return
+
+                processed_img_path = img.save_img()
+                self.send_photo(msg['chat']['id'], processed_img_path)
+                self.send_text(msg['chat']['id'], "Successfully sent photo and performed: " + caption)
+
+
+            except Exception as e:
+                self.send_text(msg['chat']['id'], "An error occurred while processing the image.")
+                logger.error(str(e))
+        else:
+            self.send_text(msg['chat']['id'], "Please send a photo")
